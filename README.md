@@ -1,28 +1,16 @@
-# Solutions Engineering Template Repository
+# F5 Presents Channel Partner Enablement Workshops
 
-A template repository that contains all required files (LICENSE, SUPPORT, CONTRIBUTING, etc) as outlined in the org standards.  
+Calling all F5 Channel Partners in North America! Join F5 during the Channel Partner Enablement Workshop hands-on and technical lab series to explore F5's latest solutions from topics relating to BIG-IP to F5 Distributed Cloud Services. Attendees also have the opportunity to earn F5 Digital Badges issued via Credly and (ISC)2 CPE Credits for select sessions; see individual session descriptions for offering details.
 
-The sections below are recommended in your project's README.md file.
+These sessions are limited to technical Channel Partners (e.g., Solution Engineers or Architects) within the United States or Canada. For customer-focused sessions, please see F5's other upcoming events.
+
+![isc2](images/isc2-cpe_submitter-partner-logo-horiz.jpg)
 
 ## Overview
 
-Provide a short overview of the project.
+[F5 Workshop Website](https://www.f5.com/go/event/channel-partner-enablement-workshops-north-america)
 
-## Getting Started
-
-Provide a quick example of how to use your code.  This should provide the user with a launch point to quickly see what the project can offer them.
-
-## Installation
-
-Outline the requirements and steps to install this project.
-
-## Usage
-
-Outline how the user can use your project and the various features the project offers.
-
-## Development
-
-Outline any requirements to setup a development environment if someone would like to contribute.  You may also link to another file for this information.
+This repository contains content for F5 Channel resources. Navigate to resources to view.
 
 ## Support
 
