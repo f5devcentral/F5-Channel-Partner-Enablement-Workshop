@@ -1,6 +1,6 @@
 # About application service migration
 
-The application service migration tool allows you to select virtual servers currently running on your BIG-IP devices to convert into Application Services (AS3 declaration) and deploy them to BIG-IP Next instances . This version of BIG-IP Next Central Manager supports migration from a UCS for application delivery and control services for HTTP and HTTPS applications services.
+The application service migration tool allows you to select virtual servers currently running on your BIG-IP devices to convert into Application Services (AS3 declaration) and deploy them to BIG-IP Next instances. This version of BIG-IP Next Central Manager supports migration from a UCS for application delivery and control services for HTTP and HTTPS applications services.
 
 The migrated application services are added to BIG-IP Next Central Manager and you can edit the AS3 declaration for later deployment.
 
