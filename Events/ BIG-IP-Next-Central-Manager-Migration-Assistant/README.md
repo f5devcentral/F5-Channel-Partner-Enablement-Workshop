@@ -121,7 +121,7 @@ Credentials for BIG-IP Next Central Manager are located under **DETAILS**
    As applications are created, the BIG-IP Next Central Manager visualizes them on the Application Dashboard. This will give users a holistic view of deployments and the health of deployed applications.
    - ![Application Dashboard](images/image30.png)
 
-16. Applicaiton Modification
+16. Application Modification
    - Application ```Common_WAF_VANILLA_VS``` has been deployed into a draft state. BIG-IP Next Central Manager will now allow modification to the AS3 declaration and review.
    - ![Common_WAF_VANILLA_VS declaration](images/image31.png)
 
