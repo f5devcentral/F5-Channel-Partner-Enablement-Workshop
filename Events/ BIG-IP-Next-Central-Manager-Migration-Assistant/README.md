@@ -43,7 +43,7 @@ Credentials for BIG-IP Next Central Manager are located under **DETAILS**
 ### Lab
 
 1. Access the **GUI** of BIG-IP Next Central Manager
-   - Credentials `admin`/`26rO!KeS3`
+   - Credentials `admin`/`yBQ^K0q2_0OOR64`
    - ![login](images/image04.png)
 
 2. Access **Manage Applications**
