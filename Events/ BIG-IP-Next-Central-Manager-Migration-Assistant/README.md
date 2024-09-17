@@ -111,7 +111,7 @@ Credentials for BIG-IP Next Central Manager are located under **DETAILS**
    - Review and approve the Virtuals to be migrated
    - ![Common_WAF_VANILLA_VS import](images/image26.png)
    - ![Common_WAF_VANILLA_VS deployment](images/image27.png)   
-   - Deploy application ```Common_WAF_VANILLA_VS``` into draft.
+   - Migrate application ```Common_WAF_VANILLA_VS``` into draft.
    - > Note: Managed instances available for deployments would also be shown on the drop-down
 
 15. Application Dashboard
@@ -130,7 +130,6 @@ Credentials for BIG-IP Next Central Manager are located under **DETAILS**
    - WAF policies are a Security resource
    - ![waf shared](images/image31.png)
    Other security resources are available in BIG-IP Next (Access, SSL Orchestrator). The WAF section contains WAF policies and Live Updates for Signatures, Bots, and Threat Campaigns.
-   - ![waf policy](images/image34.png)
    - Policy management is located in the policy itself. Policies in BIG-IP Next are managed as a Declarative WAF policy, which has been available from BIG-IP TMOS 15+. Similar to how the application configuration was converted to AS3, the WAF policy was converted to Declarative WAF. More information on [F5 Declarative WAF](https://techdocs.f5.com/en-us/bigip-15-1-0/big-ip-declarative-security-policy/declarative-policy-getting-started.html)
    - > Note: Declarative WAF policies can be moved between other F5 portfolio products, such as NGINX and F5 Distributed Cloud
    - BIG-IP Next WAF includes both IP Intelligence and Threat Campaigns, as a better security practice these addtional layers should be added
