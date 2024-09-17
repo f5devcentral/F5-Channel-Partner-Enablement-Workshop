@@ -88,15 +88,14 @@ Credentials for BIG-IP Next Central Manager are located under **DETAILS**
 
 12. After a successful import, applications can be selectively viewed for success rate, AS3 conversion, and grouping.
    - ![overview](images/image18.png)
-   - ![application list](images/image19.png)
 
 13. BIG-IP Next Application Analyze.
-   - BIG-IP Next utilizes AS3 as the declarative delivery engine. However, there are feature differences between BIG-IP TMOS and BIG-IP Next. Central Manager will highlight through an IDE these differences and allow modification or automatically make removals for unsupported objects.
+   - BIG-IP Next utilizes AS3 as the declarative delivery engine. However, there are feature differences between BIG-IP TMOS and BIG-IP Next. Central Manager will highlight a color code of the lowest posible migration score. Through the built in IDE for analysis these differences are called out or automatically make removals for unsupported objects.
    - Examine Application ```Common_IP_FORWARD_VS``` Status
    - ![Common_IP_FORWARD_VS](images/image20.png)
    - Highlighted Red are application services currently not supported on BIG-IP Next. In this example Forward Proxy virtual servers are not yet available.
    - ![Red Application](images/image21.png)
-   - Highlighted Yellow are application services that will be trimmed off for best practices or unavailable features
+   - Highlighted Green are application services that are supported features
    - ![Yellow Application](images/image22.png)
 
 14. BIG-IP Next Application Import.
@@ -104,34 +103,32 @@ Credentials for BIG-IP Next Central Manager are located under **DETAILS**
    - > Note: This environment does not have any managed BIG-IP Next instances so that all applications will go to draft
    - Import Application ```Common_WAF_VANILLA_VS```
    - ![Common_WAF_VANILLA_VS](images/image23.png)
-   - Review and approve the Virtuals being imported
-   - ![Common_WAF_VANILLA_VS import](images/image24.png)
    - This virtual requires importing a certificate/key and a WAF policy. Importing these into BIG-IP Next Central Manager will make them available for all applications from a central standpoint.
    - > Note: The import of these objects is reliant on the Master Key export from the source BIG-IP TMOS instance
-   - ![cert/key waf review](images/image25.png)
+   - ![cert/key waf review](images/image24.png)
    - Import the certificate/key to BIG-IP Next Central Manager
-   - ![cert/key waf import](images/image26.png)
+   - ![cert/key waf import](images/image25.png)
+   - Review and approve the Virtuals to be migrated
+   - ![Common_WAF_VANILLA_VS import](images/image26.png)
+   - ![Common_WAF_VANILLA_VS deployment](images/image27.png)   
    - Deploy application ```Common_WAF_VANILLA_VS``` into draft.
    - > Note: Managed instances available for deployments would also be shown on the drop-down
-   - ![Common_WAF_VANILLA_VS deployment](images/image27.png)
-   - ![Common_WAF_VANILLA_VS process](images/image28.png)
-   - ![Common_WAF_VANILLA_VS success](images/image29.png)
 
 15. Application Dashboard
    As applications are created, the BIG-IP Next Central Manager visualizes them on the Application Dashboard. This will give users a holistic view of deployments and the health of deployed applications.
-   - ![Application Dashboard](images/image30.png)
+   - ![Application Dashboard](images/image28.png)
 
 16. Application Modification
    - Application ```Common_WAF_VANILLA_VS``` has been deployed into a draft state. BIG-IP Next Central Manager will now allow modification to the AS3 declaration and review.
-   - ![Common_WAF_VANILLA_VS declaration](images/image31.png)
+   - ![Common_WAF_VANILLA_VS declaration](images/image32.png)
 
 17. Imported Application Resources Certificate and Keys
    - Certificates and Keys are located as a shared resource for applications. The import of application```Common_WAF_VANILLA_VS``` brought this certificate/key pair under the control of BIG-IP Next Central Manager
-   - ![cert/key shared](images/image32.png)
+   - ![cert/key shared](images/image29.png)
 
 18. Imported Application Resources WAF Policies
    - WAF policies are a Security resource
-   - ![waf shared](images/image33.png)
+   - ![waf shared](images/image31.png)
    Other security resources are available in BIG-IP Next (Access, SSL Orchestrator). The WAF section contains WAF policies and Live Updates for Signatures, Bots, and Threat Campaigns.
    - ![waf policy](images/image34.png)
    - Policy management is located in the policy itself. Policies in BIG-IP Next are managed as a Declarative WAF policy, which has been available from BIG-IP TMOS 15+. Similar to how the application configuration was converted to AS3, the WAF policy was converted to Declarative WAF. More information on [F5 Declarative WAF](https://techdocs.f5.com/en-us/bigip-15-1-0/big-ip-declarative-security-policy/declarative-policy-getting-started.html)
