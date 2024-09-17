@@ -28,7 +28,7 @@ After you deploy your migrated application services, you can view a summary of t
 
 This lab has only one resource, "BIG-IP Next Central Manager." External access to the environment is provided from F5 as a UDF Course or internally as the UDF Blueprint "BIG-IP Next Central Manager."
 
-> Note: Current Version is **20.2.1-0.2.16**
+> Note: Current Version is **20.3.0-0.14.48**
 
 ![components](images/image01.png)
 
