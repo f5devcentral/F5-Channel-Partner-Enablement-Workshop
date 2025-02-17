@@ -17,27 +17,16 @@ You can authenticate API requests in two ways: using an API Token or an API Cert
 
 API Token Authentication: An API token grants a user access to the NGINX One REST API or API Certificate Authentication: Include the client certificate and password in the request. The user’s role determines the permissions associated with the API token.
 
-
 Here’s how to use an API token to authenticate a request to the F5 Distributed Cloud API. This example request lists tenant namespaces for organization plans:
 
-
-```
-curl https://<tenant>.console.ves.volterra.io/api/web/namespaces -H "Authorization: APIToken <token-value>"
-```
-
+```curl https://<tenant>.console.ves.volterra.io/api/web/namespaces -H "Authorization: APIToken <token-value>"```
 
 Here’s how to use an API Certificate to authenticate a request to the F5 Distributed Cloud API. This example request lists tenant namespaces for organization plans:
 
-
-```
-curl https://<tenant>.console.ves.volterra.io/api/web/namespaces --cert-type P12 --cert <api-creds>:<password>
-```
-
+```curl https://<tenant>.console.ves.volterra.io/api/web/namespaces --cert-type P12 --cert <api-creds>:<password>```
 
 API Reference Guide: https://docs.nginx.com/nginx-one/api/api-reference-guide/
 
-
 ### Lab Environment
-
 
 ### Lab Complete
