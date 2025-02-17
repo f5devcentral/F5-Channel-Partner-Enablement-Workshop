@@ -195,6 +195,22 @@ Console:
 
 Find and save the NGINX Open Source and NGINX Plus Object IDs for later.
 
-7. NGINX One Configurations
+7. Ansible
+
+Install Ansible on the Lab Framework instance.
+
+```
+apt install ansible
+```
+
+Check Ansible version
+
+```
+ansible --version
+```
+
+![plus-objectid-console](images/image24.png)
+
+8. NGINX One Configurations
 
 ### Lab Complete
