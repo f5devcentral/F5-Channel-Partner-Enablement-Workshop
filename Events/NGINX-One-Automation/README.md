@@ -163,11 +163,21 @@ The NGINX Plus instance is now connected to NGINX One, and the server name is us
 
 ![opensource-instance](images/image17.png)
 
-You can now use NGINX One GUI to see instance information:
+You can now use NGINX One console to see instance information:
 
-![opensource-instance](images/image13.png)
+![opensource-instance](images/image18.png)
 
 5. NGINX One instance API
+
+The NGINX One API includes all the same information as the console; we can use the instance endpoint to see bound instances.
+
+```
+curl https://f5-xc-lab-app.console.ves.volterra.io/api/nginx/one/namespaces/default/instances -H "Authorization: APIToken <API TOKEN> | jq
+```
+
+![api-instance](images/image19.png)
+
+6. NGINX One Instance ObjectID
 
 
 
