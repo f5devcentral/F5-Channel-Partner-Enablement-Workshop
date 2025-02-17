@@ -179,6 +179,22 @@ curl https://f5-xc-lab-app.console.ves.volterra.io/api/nginx/one/namespaces/defa
 
 6. NGINX One Instance ObjectID
 
+Each instance of NGINX in NGINX One will be issued a unique identifier: the ObjectID. The NGINX One console uses it to send configuration and retrieve information via the NGINX Agent.
 
+![api-objectid](images/image20.png)
+
+ObjectID can be found within the instance information with the API or console.
+
+API:
+
+![plus-objectid-api](images/image21.png)
+
+Console:
+
+![plus-objectid-console](images/image22.png)
+
+Find and save the NGINX Open Source and NGINX Plus Object IDs for later.
+
+7. NGINX One Configurations
 
 ### Lab Complete
