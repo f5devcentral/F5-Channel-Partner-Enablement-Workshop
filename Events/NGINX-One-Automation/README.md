@@ -24,7 +24,7 @@ This lab environment contains five parts. Students will not use all the included
 
 ## F5 Distributed Cloud API
 
-Generate an F5 Distributed Cloud API token or certificate. In the following examples, either Token or Cert will work; however, for security reasons, users might choose one option over the other. 
+Generate an F5 Distributed Cloud API token or certificate. In the following examples, either Token or Cert will work; however, users might choose one option for security reasons. 
 
 1. You can authenticate API requests in two ways: using an API Token or an API Certificate. Below are examples of how to do this with curl.
 
@@ -64,7 +64,7 @@ Test using an API Certificate to authenticate an F5 Distributed Cloud API reques
 curl https://f5-xc-lab-app.console.ves.volterra.io/api/web/namespaces --cert-type P12 --cert <api-creds>:<password>
 ```
 
-Full F5 Distributed Cloud API Reference Guide: https://docs.cloud.f5.com/docs-v2/api
+Complete F5 Distributed Cloud API Reference Guide: https://docs.cloud.f5.com/docs-v2/api
 
 
 ### NGINX One API
@@ -81,7 +81,7 @@ Revoking a data plane key will disconnect the associated NGINX instances from NG
 
 > Note: Data plane keys are not saved and are displayed only once when you generate them. You should save this key in a secure location for future reference.
 
-Using either the API token or the API certifcate create a new NGINX One data plane key.
+Create a new NGINX One data plane key using either the API token or the API certificate.
 
 ```
 curl -X POST https://f5-xc-lab-app.console.ves.volterra.io/api/nginx/one/namespaces/default/data-plane-keys -H "Authorization: APIToken <API TOKEN>" -H "Content-Type: application/json" -d '{"name": "<DATA-PLANE-KEY-NAME>", "expires_at": "2025-05-01T00:00:00Z"}'
@@ -107,21 +107,67 @@ NGINX Agent Overview: https://docs.nginx.com/nginx-agent/overview/
 
 3. Generate instance script for NGINX One
 
-There are several different instance types that can be added to NGINX One, NGINX Plus, NGINX, Open Source, and NGINX Plus containers. All of these different instance types are available in the lab environment. 
+Several different instance types can be added to NGINX One, NGINX Plus, NGINX, Open Source, and NGINX containers. All of these different instance types are available in the lab environment. 
 
-For NGINX Plus and NGINX Open Source we will use the same method to bind the instances into NGINX One. 
+We will use the same method to bind the instances into NGINX One for NGINX Plus and NGINX Open Source. 
 
 ![lab](images/image00.png)
 
-Add a new Instance in NGINX One to retieve the install script. This script can be used over and over again across many instances. However, keep in mind if the Data Plane Key which was used is ever revoked, those instances will loose their connectivity to NGINX One.
+Add a new Instance in NGINX One to retrieve the install script. This script can be used repeatedly across many instances. However, keep in mind that if the Data Plane Key used is ever revoked, those instances will lose their connectivity to NGINX One.
 
 ![add-instance](images/image06.png)
 
-Using the Data plane Key created earilier, generate a custom install script. Save this script someplace to be used later.
+Using the Data plane Key created earlier, generate a custom install script. Save this script someplace to be used later.
 
 ![curl-script](images/image07.png)
 
-4. Add NGINX Instances to NGINX One
+4. Add NGINX Open Source Instance to NGINX One
+
+Open the Web Shell for the NGINX Open Source Instance
+
+![opensource-ws](images/image09.png)
+
+Run the script for adding the NGINX instance into NGINX One
+
+```
+curl https://agent.connect.nginx.com/nginx-agent/install | DATA_PLANE_KEY="<DATA-PLANE-KEY>" sh -s -- -y 
+```
+
+![opensource-add-01](images/image10.png)
+![opensource-add-02](images/image11.png)
+
+The NGINX Open Source instance is now connected to NGINX One, and the server name is used in NGINX One.
+
+![opensource-instance](images/image12.png)
+
+You can now use NGINX One GUI to see instance information:
+
+![opensource-instance](images/image13.png)
+
+5. Add NGINX Plus Instance to NGINX One
+
+Open the Web Shell for the NGINX Plus Instance
+
+![plus-ws](images/image14.png)
+
+Run the script for adding the NGINX instance into NGINX One
+
+```
+curl https://agent.connect.nginx.com/nginx-agent/install | DATA_PLANE_KEY="<DATA-PLANE-KEY>" sh -s -- -y 
+```
+
+![plus-add-01](images/image15.png)
+![plus-add-02](images/image16.png)
+
+The NGINX Plus instance is now connected to NGINX One, and the server name is used as the name in NGINX One.
+
+![opensource-instance](images/image17.png)
+
+You can now use NGINX One GUI to see instance information:
+
+![opensource-instance](images/image13.png)
+
+5. NGINX One instance API
 
 
 
