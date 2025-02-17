@@ -97,4 +97,32 @@ Example output:
 
 ![created-dp-key](images/image05.png)
 
+2. NGINX Agent
+
+The NGINX Agent is the mechanism which creates the communication between NGINX One (or NIM) and the NGINX Services. NGINX Agent runs as a companion process on a system running NGINX. It provides gRPC and REST interfaces for configuration management and metrics collection from the NGINX process and operating system. NGINX Agent enables remote interaction with NGINX using common Linux tools and unlocks the ability to build sophisticated monitoring and control systems that can manage large collections of NGINX instances.
+
+NGINX Agent Overview: https://docs.nginx.com/nginx-agent/overview/
+
+![agent](images/image08.png)
+
+3. Generate instance script for NGINX One
+
+There are several different instance types that can be added to NGINX One, NGINX Plus, NGINX, Open Source, and NGINX Plus containers. All of these different instance types are available in the lab environment. 
+
+For NGINX Plus and NGINX Open Source we will use the same method to bind the instances into NGINX One. 
+
+![lab](images/image00.png)
+
+Add a new Instance in NGINX One to retieve the install script. This script can be used over and over again across many instances. However, keep in mind if the Data Plane Key which was used is ever revoked, those instances will loose their connectivity to NGINX One.
+
+![add-instance](images/image06.png)
+
+Using the Data plane Key created earilier, generate a custom install script. Save this script someplace to be used later.
+
+![curl-script](images/image07.png)
+
+4. Add NGINX Instances to NGINX One
+
+
+
 ### Lab Complete
