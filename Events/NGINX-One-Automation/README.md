@@ -73,12 +73,28 @@ NGINX One API Reference Guide: https://docs.nginx.com/nginx-one/api/api-referenc
 
 1. Create a data plane key for NGINX instances.
 
+The DataPlaneKey object represents a secure token required to establish a connection between your NGINX instances and NGINX One. As a fundamental security measure, the data plane key ensures that only trusted NGINX instances can register and communicate with NGINX One.
+
+Data plane keys expire after one year. This is the default setting if you don't specify an expiration time when you create a key. If necessary, you can update the data plane key later to extend its expiration.
+
+Revoking a data plane key will disconnect the associated NGINX instances from NGINX One.
+
+> Note: Data plane keys are not saved and are displayed only once when you generate them. You should save this key in a secure location for future reference.
+
+Using either the API token or the API certifcate create a new NGINX One data plane key.
+
 ```
 curl -X POST https://f5-xc-lab-app.console.ves.volterra.io/api/nginx/one/namespaces/default/data-plane-keys -H "Authorization: APIToken <API TOKEN>" -H "Content-Type: application/json" -d '{"name": "<DATA-PLANE-KEY-NAME>", "expires_at": "2025-05-01T00:00:00Z"}'
 ```
 
+OR
+
 ```
 curl -X POST https://f5-xc-lab-app.console.ves.volterra.io/api/nginx/one/namespaces/default/data-plane-keys --cert-type P12 --cert <api-creds>:<password> -H "Content-Type: application/json" -d '{"name": "<DATA-PLANE-KEY-NAME>", "expires_at": "2025-05-01T00:00:00Z"}'
 ```
+
+Example output:
+
+![created-dp-key](images/image05.png)
 
 ### Lab Complete
