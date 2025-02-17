@@ -22,14 +22,16 @@ Here’s how to use an API token to authenticate a request to the F5 Distributed
 
 
 ```curl https://<tenant>.console.ves.volterra.io/api/web/namespaces \
--H "Authorization: APIToken <token-value>"```
+-H "Authorization: APIToken <token-value>"
+```
 
 
 Here’s how to use an API Certificate to authenticate a request to the F5 Distributed Cloud API. This example request lists tenant namespaces for organization plans:
 
 
 ```curl https://<tenant>.console.ves.volterra.io/api/web/namespaces --cert-type P12 \
---cert <api-creds>:<password>```
+--cert <api-creds>:<password>
+```
 
 
 API Reference Guide: https://docs.nginx.com/nginx-one/api/api-reference-guide/
