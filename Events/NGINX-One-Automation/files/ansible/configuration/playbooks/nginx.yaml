@@ -3,3 +3,4 @@
   hosts: localhost
   roles:
     - ../roles/nginx-plus
+    - ../roles/nginx-os

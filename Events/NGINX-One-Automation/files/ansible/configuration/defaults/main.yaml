@@ -6,6 +6,8 @@ nginx_one_f5xc_api_token : ""
 # List of NGINX One Instance IDs
 nginx_plus_instances: 
   - instance: inst_replace
+
+nginx_os_instances: 
   - instance: inst_replace
 
 # Use Ansible module or skip

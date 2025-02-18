@@ -1,6 +1,6 @@
 # NGINX Application Services
 
-# Create Configuration In NGINX One Tenant
+# Create Configuration In NGINX One
 
 - name: Include Variables
   ansible.builtin.include_vars: "../../../defaults/main.yaml"
@@ -19,6 +19,8 @@
   delay: 5
   until: "(nginx_one_instances_summary_response is successful) and (nginx_one_instances_summary_response.status == 200)"
   when: state == "present"
+
+# NGINX Plus Instances
 
 - name: Template NGINX One nginx-plus Cluster Declaration
   template: src="../config/nginx-plus/nginx-plus.tpl" dest="../config/nginx-plus/nginx-plus.json"
@@ -41,4 +43,29 @@
   delay: 5
   with_items:
     - "{{ nginx_plus_instances }}"
+  when: state == "present"
+
+# NGINX Open Source Instances
+
+- name: Template NGINX One nginx-os Cluster Declaration
+  template: src="../config/nginx-os/nginx-os.tpl" dest="../config/nginx-os/nginx-os.json"
+  delegate_to: localhost
+  when: state == "present"
+
+- name: Create or update NGINX One nginx-os Cluster Declaration
+  delegate_to: localhost
+  uri:
+    body: "{{ lookup('ansible.builtin.file','../config/nginx-os/nginx-os.json') }}"
+    body_format: json
+    headers:
+      Authorization: "APIToken {{ nginx_one_f5xc_api_token }}"
+    method: PUT
+    url: "https://{{ nginx_one_f5xc_tenant }}.console.ves.volterra.io/api/nginx/one/namespaces/default/instances/{{ item.instance }}/config"
+    status_code: [200, 202]
+    validate_certs: yes
+  register: nginx_one_instance_group_put_response
+  retries: 30
+  delay: 5
+  with_items:
+    - "{{ nginx_os_instances }}"
   when: state == "present"
