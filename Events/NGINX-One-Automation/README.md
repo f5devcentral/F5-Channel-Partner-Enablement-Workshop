@@ -10,9 +10,11 @@ NGINX One offers the following key benefits:
 - Graphical Metrics Display: Access a dashboard that shows key metrics for your NGINX instances, including instance availability, version distribution, system health, and utilization trends.
 - Real-time alerts: Receive alerts about critical issues.
 
-### Lab Environment
+## Lab Environment
 
 This lab environment contains five parts. Students will not use all the included lab components.
+
+*** Unless otherwise noted you will do all terminal access through the Web Shell access on the Lab Framework Server ***
 
 - NGINX Open Source Server
 - NGINX Plus Server
@@ -67,7 +69,7 @@ curl https://f5-xc-lab-app.console.ves.volterra.io/api/web/namespaces --cert-typ
 Complete F5 Distributed Cloud API Reference Guide: https://docs.cloud.f5.com/docs-v2/api
 
 
-### NGINX One API
+### NGINX One API - Part 1
 
 NGINX One API Reference Guide: https://docs.nginx.com/nginx-one/api/api-reference-guide/
 
@@ -231,7 +233,7 @@ Using whatever Linux editor you choose (examples in vi), open and modify the def
 vi F5-Channel-Partner-Enablement-Workshop/Events/NGINX-One-Automation/files/ansible/configuration/defaults/main.yaml
 ```
 
-Modify the following four locations for your environment
+Modify the following four locations for your environment, and save the file
 
 > Note: In this workshop the nginx_one_f5xc_tenant is ```f5-xc-lab-app```
 
@@ -257,6 +259,10 @@ ansible_date_time: "{{ lookup('pipe', 'date +%Y-%m-%d.%H:%M:%S') }}"
 
 ```
 
-8. NGINX One Configurations
+### NGINX One API - Part 2
+
+1. NGINX One Configurations
+
+
 
 ### Lab Complete
