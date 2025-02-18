@@ -107,7 +107,7 @@ NGINX Agent Overview: https://docs.nginx.com/nginx-agent/overview/
 
 3. Generate instance script for NGINX One
 
-Several different instance types can be added to NGINX One, NGINX Plus, NGINX, Open Source, and NGINX containers. All of these different instance types are available in the lab environment. 
+Several instance types can be added to NGINX One, NGINX Plus, NGINX, Open Source, and NGINX containers. All of these different instance types are available in the lab environment. 
 
 We will use the same method to bind the instances into NGINX One for NGINX Plus and NGINX Open Source. 
 
@@ -210,6 +210,52 @@ ansible --version
 ```
 
 ![plus-objectid-console](images/image24.png)
+
+Clone this repository for Ansible Playbooks
+
+```
+git clone https://github.com/f5devcentral/F5-Channel-Partner-Enablement-Workshop
+```
+
+![ansible-playbook](images/image23.png)
+
+8. Ansible Setup
+
+Before we can use Ansible to start managing the configuration of our NGINX instances, we need to modify our default file for some variables about our environment. There are many places to store secure variables, but this demonstration shows the easiest path to configuration management with clear variables.
+
+Using whatever Linux editor you choose (examples in vi), open and modify the defaults main.yaml.
+
+![ansible-workshop](images/image25.png)
+
+```
+vi F5-Channel-Partner-Enablement-Workshop/Events/NGINX-One-Automation/files/ansible/configuration/defaults/main.yaml
+```
+
+Modify the following four locations for your environment
+
+> Note: In this workshop the nginx_one_f5xc_tenant is ```f5-xc-lab-app```
+
+```
+# Ansible Variables
+
+nginx_one_f5xc_tenant: ""           <---------- Insert your F5 Distributed Cloud Tenant in quotes
+nginx_one_f5xc_api_token : ""       <---------- Insert your F5 Distributed Cloud API Token in quotes
+
+# List of NGINX One Instance IDs
+nginx_plus_instances:
+ - instance: inst_replace          <---------- Insert your NGINX Plus ObjectID
+
+nginx_os_instances:
+ - instance: inst_replace          <---------- Insert your NGINX Open Source ObjectID
+
+# Use Ansible module or skip
+state: "present"
+#state: 'absent'
+
+# Ansible Date Time
+ansible_date_time: "{{ lookup('pipe', 'date +%Y-%m-%d.%H:%M:%S') }}"
+
+```
 
 8. NGINX One Configurations
 
