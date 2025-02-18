@@ -169,7 +169,7 @@ You can now use NGINX One console to see instance information:
 
 ![opensource-instance](images/image18.png)
 
-5. NGINX One instance API
+6. NGINX One instance API
 
 The NGINX One API includes all the same information as the console; we can use the instance endpoint to see bound instances.
 
@@ -179,7 +179,7 @@ curl https://f5-xc-lab-app.console.ves.volterra.io/api/nginx/one/namespaces/defa
 
 ![api-instance](images/image19.png)
 
-6. NGINX One Instance ObjectID
+7. NGINX One Instance ObjectID
 
 Each instance of NGINX in NGINX One will be issued a unique identifier: the ObjectID. The NGINX One console uses it to send configuration and retrieve information via the NGINX Agent.
 
@@ -197,7 +197,7 @@ Console:
 
 Find and save the NGINX Open Source and NGINX Plus Object IDs for later.
 
-7. Ansible
+8. Ansible
 
 Install Ansible on the Lab Framework instance.
 
@@ -221,7 +221,7 @@ git clone https://github.com/f5devcentral/F5-Channel-Partner-Enablement-Workshop
 
 ![ansible-playbook](images/image23.png)
 
-8. Ansible Setup
+9. Ansible Setup
 
 Before we can use Ansible to start managing the configuration of our NGINX instances, we need to modify our default file for some variables about our environment. There are many places to store secure variables, but this demonstration shows the easiest path to configuration management with clear variables.
 
@@ -337,12 +337,49 @@ NGINX Open Source
 ![os-access](images/image29.png)
 ![os-index](images/image30.png)
 
-The code snippet above has not been added yet, navigating to the /image endpoint of either NGINX instance will result in a 404 page not found
+The code snippet from above has not been added yet, navigating to the /image endpoint of either NGINX instance will result in a 404 page not found
 
 ![404](images/image31.png)
 
-4. Ansible Playbook
+4. Ansible Roles
 
+The workflow for Ansible is to verify access to the NGINX One Instance API endpoint, consume the NGINX template file, and create a new valid JSON file, which is then sent to the NGINX Instance API endpoint for analysis and delivery.
 
+Two roles emulate two environments controlled through automation but managed by the same NGINX One platform.
+
+NGINX Plus Playbook
+
+```
+cat F5-Channel-Partner-Enablement-Workshop/Events/NGINX-One-Automation/files/ansible/configuration/roles/nginx-plus/tasks/main.yaml 
+```
+
+NGINX Open Source Playbook
+
+```
+cat F5-Channel-Partner-Enablement-Workshop/Events/NGINX-One-Automation/files/ansible/configuration/roles/nginx-os/tasks/main.yaml 
+```
+
+4. Ansible Playbook Execution
+
+Updating the NGINX Instances are controlled through a single Ansible playbook which runs the two roles for NGINX Plus and NGINX Open Source.
+
+Run Ansible:
+
+```
+ansible-playbook F5-Channel-Partner-Enablement-Workshop/Events/NGINX-One-Automation/files/ansible/configuration/playbooks/nginx.yaml
+```
+
+![playbook](images/image32.png)
+
+5. Validation
+
+NGINX One has processed the configuration and sent the final configuration to the NGINX instances via NGINX Agent. From the console, the configurations contain the new image location.
+
+![plus-image](images/image33.png)
+![os-image](images/image34.png)
+
+6. Complete
+
+There are two easter egg images, one on each NGINX Instance, available on the /image URI, which are a few of my favorite things.
 
 ### Lab Complete
