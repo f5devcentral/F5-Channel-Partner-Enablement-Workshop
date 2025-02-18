@@ -14,7 +14,7 @@ NGINX One offers the following key benefits:
 
 This lab environment contains five parts. Students will not use all the included lab components.
 
-*** Unless otherwise noted you will do all terminal access through the Web Shell access on the Lab Framework Server ***
+### Unless otherwise noted you will do all terminal access through the Web Shell access on the Lab Framework Server ###
 
 - NGINX Open Source Server
 - NGINX Plus Server
@@ -262,6 +262,86 @@ ansible_date_time: "{{ lookup('pipe', 'date +%Y-%m-%d.%H:%M:%S') }}"
 ### NGINX One API - Part 2
 
 1. NGINX One Configurations
+
+NGINX Instance configuration through NGINX One is a declarative JSON file containing NGINX directives and objects. All the content of the files and their directives are base64encoded to ensure spaces and special characters don't interfere with configuration options.
+
+The NGINX One API endpoint utilizes the PUT method, which will run through an analysis of the configuration before sending it to the instance. This ensures only valid configurations will land on an NGINX One-controlled NGINX instance.
+
+Crafting an NGINX instance from nothing can be a unique challenge; you will need to understand the NGINX configuration and the structure of the NGINX One JSON file. Below is an example of a single section of a more extensive NGINX One Instance configuration:
+
+```
+        {
+          "contents": "c2VydmVyIHsKICAgIGxpc3RlbiA4MCBkZWZhdWx0X3NlcnZlcjsKICAgIHNlcnZlcl9uYW1lIGFwcF9zZXJ2ZXI7CgogICAgcm9vdCAvdXNyL3NoYXJlL25naW54L2h0bWw7CiAgICBlcnJvcl9sb2cgL3Zhci9sb2cvbmdpbngvYXBwLXNlcnZlci1lcnJvci5sb2cgbm90aWNlOwogICAgaW5kZXggZGVtby1pbmRleC5odG1sIGluZGV4Lmh0bWw7CiAgICBleHBpcmVzIC0xOwoKICAgIHN1Yl9maWx0ZXJfb25jZSBvZmY7CiAgICBzdWJfZmlsdGVyICdzZXJ2ZXJfaG9zdG5hbWUnICckaG9zdG5hbWUnOwogICAgc3ViX2ZpbHRlciAnc2VydmVyX2FkZHJlc3MnICAnJHNlcnZlcl9hZGRyOiRzZXJ2ZXJfcG9ydCc7CiAgICBzdWJfZmlsdGVyICdzZXJ2ZXJfdXJsJyAgICAgICckcmVxdWVzdF91cmknOwogICAgc3ViX2ZpbHRlciAncmVtb3RlX2FkZHInICAgICAnJHJlbW90ZV9hZGRyOiRyZW1vdGVfcG9ydCc7CiAgICBzdWJfZmlsdGVyICdzZXJ2ZXJfZGF0ZScgICAgICckdGltZV9sb2NhbCc7CiAgICBzdWJfZmlsdGVyICdjbGllbnRfYnJvd3NlcicgICckaHR0cF91c2VyX2FnZW50JzsKICAgIHN1Yl9maWx0ZXIgJ3JlcXVlc3RfaWQnICAgICAgJyRyZXF1ZXN0X2lkJzsKICAgIHN1Yl9maWx0ZXIgJ25naW54X3ZlcnNpb24nICAgJyRuZ2lueF92ZXJzaW9uJzsKICAgIHN1Yl9maWx0ZXIgJ2RvY3VtZW50X3Jvb3QnICAgJyRkb2N1bWVudF9yb290JzsKICAgIHN1Yl9maWx0ZXIgJ3Byb3hpZWRfZm9yX2lwJyAgJyRodHRwX3hfZm9yd2FyZGVkX2Zvcic7CgogICAgbG9jYXRpb24gL2ltYWdlIHsKICAgICAgICB0eXBlcyB7fQogICAgICAgIGRlZmF1bHRfdHlwZSB0ZXh0L2h0bWw7CiAgICAgICAgcmV0dXJuIDIwMCAKICAgICAgICAgICAgJzxodG1sPgogICAgICAgICAgICAgICAgPGJvZHk+CiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0idHJvdXQiPgogICAgICAgICAgICAgICAgICAgICAgICBZb3UganVzdCB1cGRhdGVkIHRoZSBOR0lOWCBQbHVzIHNlcnZlciwgRmluLWFsbHkgY2F1Z2h0IHRoZSBwZXJmZWN0IHRyb3V0ISAKICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxicj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxicj4KICAgICAgICAgICAgICAgICAgICAgICAgPGltZyBzcmM9Imh0dHBzOi8vaS5ldHN5c3RhdGljLmNvbS80MTczMjMyMi9yL2lsLzdmNmZiNy81NjMzOTU4NTgyL2lsXzU3MHhOLjU2MzM5NTg1ODJfZ3Zqdi5qcGcgIndpZHRoPSI2NDAiIGhlaWdodD0iNDgwIj4KICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgIDwvYm9keT4KICAgICAgICAgICAgPC9odG1sPic7CiAgICAgICAgfQp9",
+          "mtime": "{{ ansible_date_time }}",
+          "name": "demo.conf"
+        }
+```       
+
+This snippet is taken from the more extensive NGINX Plus configuration; it contains enough information for NGINX One to create a new file called "demo.conf" with the contents base64encoded. This snippet of code is part of a larger template that utilizes an Ansible module to insert the time of modification or "mtime", making sure the historical account is accurate.
+
+Base 64 decode the contents:
+
+```
+echo c2VydmVyIHsKICAgIGxpc3RlbiA4MCBkZWZhdWx0X3NlcnZlcjsKICAgIHNlcnZlcl9uYW1lIGFwcF9zZXJ2ZXI7CgogICAgcm9vdCAvdXNyL3NoYXJlL25naW54L2h0bWw7CiAgICBlcnJvcl9sb2cgL3Zhci9sb2cvbmdpbngvYXBwLXNlcnZlci1lcnJvci5sb2cgbm90aWNlOwogICAgaW5kZXggZGVtby1pbmRleC5odG1sIGluZGV4Lmh0bWw7CiAgICBleHBpcmVzIC0xOwoKICAgIHN1Yl9maWx0ZXJfb25jZSBvZmY7CiAgICBzdWJfZmlsdGVyICdzZXJ2ZXJfaG9zdG5hbWUnICckaG9zdG5hbWUnOwogICAgc3ViX2ZpbHRlciAnc2VydmVyX2FkZHJlc3MnICAnJHNlcnZlcl9hZGRyOiRzZXJ2ZXJfcG9ydCc7CiAgICBzdWJfZmlsdGVyICdzZXJ2ZXJfdXJsJyAgICAgICckcmVxdWVzdF91cmknOwogICAgc3ViX2ZpbHRlciAncmVtb3RlX2FkZHInICAgICAnJHJlbW90ZV9hZGRyOiRyZW1vdGVfcG9ydCc7CiAgICBzdWJfZmlsdGVyICdzZXJ2ZXJfZGF0ZScgICAgICckdGltZV9sb2NhbCc7CiAgICBzdWJfZmlsdGVyICdjbGllbnRfYnJvd3NlcicgICckaHR0cF91c2VyX2FnZW50JzsKICAgIHN1Yl9maWx0ZXIgJ3JlcXVlc3RfaWQnICAgICAgJyRyZXF1ZXN0X2lkJzsKICAgIHN1Yl9maWx0ZXIgJ25naW54X3ZlcnNpb24nICAgJyRuZ2lueF92ZXJzaW9uJzsKICAgIHN1Yl9maWx0ZXIgJ2RvY3VtZW50X3Jvb3QnICAgJyRkb2N1bWVudF9yb290JzsKICAgIHN1Yl9maWx0ZXIgJ3Byb3hpZWRfZm9yX2lwJyAgJyRodHRwX3hfZm9yd2FyZGVkX2Zvcic7CgogICAgbG9jYXRpb24gL2ltYWdlIHsKICAgICAgICB0eXBlcyB7fQogICAgICAgIGRlZmF1bHRfdHlwZSB0ZXh0L2h0bWw7CiAgICAgICAgcmV0dXJuIDIwMCAKICAgICAgICAgICAgJzxodG1sPgogICAgICAgICAgICAgICAgPGJvZHk+CiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0idHJvdXQiPgogICAgICAgICAgICAgICAgICAgICAgICBZb3UganVzdCB1cGRhdGVkIHRoZSBOR0lOWCBQbHVzIHNlcnZlciwgRmluLWFsbHkgY2F1Z2h0IHRoZSBwZXJmZWN0IHRyb3V0ISAKICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxicj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxicj4KICAgICAgICAgICAgICAgICAgICAgICAgPGltZyBzcmM9Imh0dHBzOi8vaS5ldHN5c3RhdGljLmNvbS80MTczMjMyMi9yL2lsLzdmNmZiNy81NjMzOTU4NTgyL2lsXzU3MHhOLjU2MzM5NTg1ODJfZ3Zqdi5qcGcgIndpZHRoPSI2NDAiIGhlaWdodD0iNDgwIj4KICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgIDwvYm9keT4KICAgICAgICAgICAgPC9odG1sPic7CiAgICAgICAgfQp9 | base64 --decode
+```
+
+Most of this configuration is based on default NGINX best practices; what is added is under the /image location. When this snippet of code is sent to NGINX One, our NGINX plus server will start listening for /image and present the content.
+
+```
+    location /image {
+        types {}
+        default_type text/html;
+        return 200 
+            '<html>
+                <body>
+                    <div class="trout">
+                        You just updated the NGINX Plus server, Fin-ally caught the perfect trout! 
+                            <br>
+                            <br>
+                        <img src="https://i.etsystatic.com/41732322/r/il/7f6fb7/5633958582/il_570xN.5633958582_gvjv.jpg "width="640" height="480">
+                    </div>
+                </body>
+            </html>';
+        }
+```
+
+2. Configuration templates for the NGINX Plus and NGINX Open Source instances was downloaded when this repository was cloned. The main.yaml which was updated earlier contain the variables needed for Ansible to run successfully. 
+
+![folder](images/image26.png)
+
+The template files do not need to be altered; Ansible will use them during the playbook's execution to insert the mtime and send it to NGINX One. These two NGINX instance configurations differ since NGINX Plus and NGINX Open Source contain different feature sets. An example of that in the code is the extra modules loaded into NGINX Open Source, which NGINX Plus has natively.
+
+NGINX Plus Template
+
+```
+cat F5-Channel-Partner-Enablement-Workshop/Events/NGINX-One-Automation/files/ansible/configuration/config/nginx-plus/nginx-plus.tpl 
+```
+
+NGINX Open Source Template
+
+```
+cat F5-Channel-Partner-Enablement-Workshop/Events/NGINX-One-Automation/files/ansible/configuration/config/nginx-os/nginx-os.tpl 
+```
+
+3. Pre-API Configuration NGINX Plus and NGINX Open Source
+
+The NGINX servers have some default configuration which will allow you to see information about the instance. For both instances open the NGINX HTTP access method
+
+NGINX Plus
+
+![plus-access](images/image27.png)
+![plus-index](images/image28.png)
+
+NGINX Open Source
+
+![os-access](images/image29.png)
+![os-index](images/image30.png)
+
+The code snippet above has not been added yet, navigating to the /image endpoint of either NGINX instance will result in a 404 page not found
+
+![404](images/image31.png)
+
+4. Ansible Playbook
 
 
 
