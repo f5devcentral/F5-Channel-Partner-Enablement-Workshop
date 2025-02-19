@@ -14,7 +14,7 @@ NGINX One offers the following key benefits:
 
 This lab environment contains five parts. Students will not use all the included lab components.
 
-### Unless otherwise noted you will do all terminal access through the Web Shell access on the Lab Framework Server ###
+### Unless otherwise noted you will do all terminal access through the Web Shell on the Lab Framework Server ###
 
 - NGINX Open Source Server
 - NGINX Plus Server
