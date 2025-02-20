@@ -123,11 +123,6 @@ Using the Data plane Key created earlier, generate a custom install script. Save
 
 4. Add NGINX Open Source Instance to NGINX One
 
-> Note: In environments where the addresses or hostnames could be the same, you can use the data plane key as a unique identifier to find instances added to the NGINX One console.
-
-![dp-key](images/image35.png)
-![dp-key-instances](images/image36.png)
-
 Open the Web Shell for the NGINX Open Source Instance
 
 ![opensource-ws](images/image09.png)
@@ -149,6 +144,9 @@ You can now use NGINX One GUI to see instance information:
 
 ![opensource-instance](images/image13.png)
 
+> Note: In environments where the addresses or hostnames could be the same, you can use the data plane key as a unique identifier to find instances added to the NGINX One console.
+![dp-key-instances](images/image36.png)
+
 5. Add NGINX Plus Instance to NGINX One
 
 Open the Web Shell for the NGINX Plus Instance
@@ -166,13 +164,16 @@ curl https://agent.connect.nginx.com/nginx-agent/install | DATA_PLANE_KEY="<DATA
 
 The NGINX Plus instance is now connected to NGINX One, and the server name is used as the name in NGINX One.
 
-![opensource-instance](images/image17.png)
+![plus-instance](images/image17.png)
 
 You can now use NGINX One console to see instance information:
 
-![opensource-instance](images/image18.png)
+![plus-instance](images/image18.png)
 
-The NGINX Agent install script is shown as a simple method because our NGINX instances were pre-created. Utilizing a bootstrap mechanism is another way to do the operation more programmatically. Cloud-Init or the "template-file" resource in Terraform containing the installation script will bring instances into the NGINX One console on creation. 
+> Note: In environments where the addresses or hostnames could be the same, you can use the data plane key as a unique identifier to find instances added to the NGINX One console.
+![dp-key-instances](images/image36.png)
+
+5.1. The NGINX Agent install script is shown as a simple method because our NGINX instances were pre-created. Utilizing a bootstrap mechanism is another way to do the operation more programmatically. Cloud-Init or the "template-file" resource in Terraform containing the installation script will bring instances into the NGINX One console on creation. 
 
 An example of template-file and Terraform are here: 
 - https://github.com/jmcalalang/lab/blob/main/nginx/terraform/infrastructure/files/bootstrap-instance-group-azure-instances.sh
