@@ -145,6 +145,7 @@ You can now use NGINX One GUI to see instance information:
 ![opensource-instance](images/image13.png)
 
 > Note: In environments where the addresses or hostnames could be the same, you can use the data plane key as a unique identifier to find instances added to the NGINX One console.
+
 ![dp-key-instances](images/image36.png)
 
 5. Add NGINX Plus Instance to NGINX One
@@ -171,6 +172,7 @@ You can now use NGINX One console to see instance information:
 ![plus-instance](images/image18.png)
 
 > Note: In environments where the addresses or hostnames could be the same, you can use the data plane key as a unique identifier to find instances added to the NGINX One console.
+
 ![dp-key-instances](images/image36.png)
 
 5.1. The NGINX Agent install script is shown as a simple method because our NGINX instances were pre-created. Utilizing a bootstrap mechanism is another way to do the operation more programmatically. Cloud-Init or the "template-file" resource in Terraform containing the installation script will bring instances into the NGINX One console on creation. 
