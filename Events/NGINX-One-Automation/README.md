@@ -186,7 +186,7 @@ An example of template-file and Terraform are here:
 The NGINX One API includes all the same information as the console; we can use the instance endpoint to see bound instances.
 
 ```
-curl https://f5-xc-lab-app.console.ves.volterra.io/api/nginx/one/namespaces/default/instances -H "Authorization: APIToken <API TOKEN> | jq
+curl https://f5-xc-lab-app.console.ves.volterra.io/api/nginx/one/namespaces/default/instances -H "Authorization: APIToken <API TOKEN>" | jq
 ```
 
 ![api-instance](images/image19.png)
