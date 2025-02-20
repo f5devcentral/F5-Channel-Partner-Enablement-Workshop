@@ -123,6 +123,11 @@ Using the Data plane Key created earlier, generate a custom install script. Save
 
 4. Add NGINX Open Source Instance to NGINX One
 
+> Note: In environments where the addresses or hostnames could be the same, you can use the data plane key as a unique identifier to find instances added to the NGINX One console.
+
+![dp-key](images/image35.png)
+![dp-key-instances](images/image36.png)
+
 Open the Web Shell for the NGINX Open Source Instance
 
 ![opensource-ws](images/image09.png)
