@@ -395,3 +395,7 @@ NGINX One has processed the configuration and sent the final configuration to th
 There are two easter egg images, one on each NGINX Instance, available on the /image URI, which are a few of my favorite things.
 
 ### Lab Complete
+
+### Bonus!
+
+Ask me about Config Sync Groups!
