@@ -47,19 +47,15 @@ From the Windows-client, we will be able to access the BIG-IP TMUI and the websi
 
 ![rdp-cert](images/image03.png)
 
-4. Scroll down and accept the privacy settings
-
-![privacy-settings](images/image04.png)
-
-5. Open the Chrome browser and skip the sign-in process
+4. Open the Chrome browser and skip the sign-in process
 
 ![chrome-login](images/image05.png)
 
-6. Set Chrome as the default browser
+5. Set Chrome as the default browser
 
 ![chrome-default](images/image06.png)
 
-7. Set the system-level default to Chrome and close the system properties
+6. Set the system-level default to Chrome and close the system properties
 
 ![chrome-system](images/image07.png)
 
@@ -67,15 +63,17 @@ From the Windows-client, we will be able to access the BIG-IP TMUI and the websi
 
 ### BIG-IP Setup
 
-BIG-IP has 17.5 installed. In 17.1, PQC for client-side SSL profiles was introduced, which we will explore in this lab. In 17.5, PQC for server-side SSL profiles was added, and both client and server-side ciphers were updated to the NIST standards at the time of publication.
+BIG-IP has 17.5 installed. In 17.1, PQC for client-side SSL profiles was introduced, which we will explore in this lab. In 17.5.1, PQC for server-side SSL profiles was added, and both client and server-side ciphers were updated to the NIST standards at the time of publication.
+
+BIG-IP supports both Kyber and ML-KEM, in this lab we will be showing Kyber, though ML-KEM is more widely adopted.
 
 > Note: We will not be doing server-side SSL PQC setup; however, the environment supports it, for exploration.
 
-Understanding PQC Standards and Timelines: https://www.f5.com/company/blog/understanding-pqc-standards-and-timelines
+Understanding PQC Standards and Timelines: ```https://www.f5.com/company/blog/understanding-pqc-standards-and-timelines```
 
 1. Log in to the BIG-IP to verify access and configuration
 
-From the Chrome browser, open the BIG-IP TMUI: https://10.1.1.6
+From the Chrome browser, open the BIG-IP TMUI: ```https://10.1.1.6```
 
 ![tmui-warning](images/image08.png)
 ![tmui-accept](images/image09.png)
@@ -89,7 +87,7 @@ Password admin
 
 BIG-IP utilizes SSL Profiles for client and server-side TLS negotiations. Within the SSL Profile, attached cipher groups manage the cipher rules for negotiation.
 
-Configuration has already been created on behalf of the lab. If you would like to configure and familiarize yourself with a new SSL profile, here is the public documentation for 17.5 and 17.5.1: https://my.f5.com/manage/s/article/K000149577
+Configuration has already been created on behalf of the lab. If you would like to configure and familiarize yourself with a new SSL profile, here is the public documentation for 17.5 and 17.5.1: ```https://my.f5.com/manage/s/article/K000149577```
 
 3. Navigate to BIG-IP cipher rules
 
@@ -193,7 +191,7 @@ The Chrome browser has experimental features that enable Kyber and ML-KEM. Howev
 
 Enable the security features in Chrome to use the Kyber settings, but prefer ML-KEM settings
 
-1. Open the Chrome browser and browse to chrome://flags/
+1. Open the Chrome browser and browse to ```chrome://flags/```
 
 2. Change the experimental settings to enable "TLS 1.3 post-quantum key agreement", and enable "Use ML-KEM in TLS 1.3", and relaunch the browser
 
