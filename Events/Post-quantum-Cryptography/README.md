@@ -17,6 +17,13 @@ NGINX provides PQC support using the Open Quantum Safe provider library for Open
 [Understanding PQC Standards and Timelines](https://www.f5.com/company/blog/understanding-pqc-standards-and-timelines)
 
 <br>
+## The lab
+This lab provides hands-on experience with PQC across modern application delivery architectures. It will build a practical understanding of where PQC fits in the TLS stack, how it is implemented on F5 and NGINX, and how to validate the traffic behavior. By the end of the lab, you will be able to:
+
+- Understand core PQC concepts and standards
+- Configure PQC enabled TLS profiles on F5 BIG-IP for client-side encryption
+- Explore PQC implementation in NGINX using OpenSSL and the Open Quantum Safe (OQS) provider
+- Validate PQC cipher negotiation using Chrome developer tools
 
 ## Lab Environment
 
@@ -30,11 +37,14 @@ This lab environment contains three parts:
 
 ### Windows-client
 
-From the Windows-client we will be able to access the BIG-IP TMUI, NGINX, and the websites protected with PQC profiles/OpenSSL.
+From the Windows-client we will be able to access the BIG-IP TMUI, NGINX, and the websites protected with PQC profiles/OpenSSL. In this section, you will primarily perform the following tasks:
+
+- Log in to the Windows client
+- Set the Google Chrome as the default browser
 
 1. Navigate to the details button of the Windows-client. Select either RDP or Console to access the Windows-client.
     - MAC users should connect with RDP 
-    - Windows users should connect using the Console  
+    - Windows users: If the RDP session does not display properly or cannot be resized to large screen, please connect using the Console instead
 
    > Note: For RDP, select the appropriate resolution format -- This will initiate the rdp file download which then can be used to access the Windows-client.
    > Note: To run the RDP session in "windowed" mode, choose a screen size from the drop-down list
@@ -76,11 +86,19 @@ From the Windows-client we will be able to access the BIG-IP TMUI, NGINX, and th
 
 ### BIG-IP Setup
 
-BIG-IP has version 17.5.1.3.0.0.19 installed. In version 17.1, PQC for client-side SSL profiles was introduced, which we will explore in this lab. In version 17.5.1, PQC for server-side SSL profiles was added, and both client and server-side ciphers were updated to the NIST standards at the time of publication.
+BIG-IP has version 17.5.1.3.0.0.19 installed. In version 17.1, PQC for client-side SSL profiles was introduced, which we will explore in this lab. In version 17.5.1, PQC for server-side SSL profiles was added, and both client and server-side ciphers were updated to the NIST standards at the time of publication. 
 
 BIG-IP supports both Kyber and ML-KEM, in this lab we will demonstrate Kyber, though ML-KEM is more widely adopted.
 
 > Note: We will not demonstrate server-side SSL PQC in this lab; however, the environment supports it, for exploration.  
+<br>
+
+In this section, you will primarily perform the following tasks:
+
+- Review BIG-IP client ssl profile
+- Create and verify Cipher Rules and Groups (Cipher Rules & Groups are a visual way to organize and apply cipher suites to your client and ssl profiles
+
+   The BIG-IP configuration required for this lab has already been completed. You may choose to simply review the existing configuration and skip steps 3 to 14 and go direclty to Step 15. If you prefer to create the configuration yourself, please start from Step 1 to configure the cipher rules and cipher groups and attach them to the SSL profile. For additional guidance, refer to the following knowledge article for detailed instructions: [K000149577: Enable post-quantum cryptography in F5 BIG-IP TMOS](https://my.f5.com/manage/s/article/K000149577)
 <br>
 
 1. Log into the BIG-IP to verify access and configuration
@@ -107,49 +125,86 @@ BIG-IP supports both Kyber and ML-KEM, in this lab we will demonstrate Kyber, th
     The BIG-IP Configuration has already been completed for the lab. If you would like to configure and familiarize yourself with a new SSL profile, please use the following knowledge article as a reference: [K000149577: Enable post-quantum cryptography in F5 BIG-IP TMOS](https://my.f5.com/manage/s/article/K000149577)
 <br>
 
-3. Navigate to BIG-IP cipher rules
-
-    ![cipher-rules](images/image11.png)
+## Create a new Cipher Rule
+3. Navigate to BIG-IP cipher rules go to (Local Traffic > Ciphers > Rules), Select Create.
+    ![cipher-rule-creation](images/image11.png)
 <br>
 
-4. The `TMSH_PQC` PQC profile has been created for you using TMSH.  Please review it using the TMUI.
+4. For the name of the Cipher Rule "TMSH_PQC_NEW"
+5. For the recommended list of suites, use DEFAULT
+6. For DH Groups we willuse KYBER, enter X25519KYBER768
+7. For Signature Algorithms enter DEFAULT to use the recommended list of signature algorithms
+> Note: You will see the Cryptographic Parameters populates with parameters.  
+<br>
+    ![cipher-rule-parameter](images/image100.png)
+<br>
+8. Select Finished.
+
+Create a new Cipher Groupe
+9. Navigate to BIG-IP cipher rules go to (Local Traffic > Ciphers > Groups), select Create
+    ![cipher-groups-creation](images/image14.png)
+<br>
+
+10. Provide a name dor Cipher Suites "TMSH_PQC_NEW"
+11. In Group Details, add the newly created Cipher Rule to the Allowed list by selecting "/Common/TMSH_PQC_NEW" from the Available Rules and move it to the Allow section
+12. Select Finished.
+        ![cipher-groups-parameters](images/image101.png)
+<br>
+
+Update SSL Client profile
+13. Navigate to Local Traffic > Profiles > SSL > Client and select the existing TMSH_PQC client SSL
+    ![client-profiles](images/image16.png)
+<br>
+14. Select Advanced and in the Cipher Section, make sure Cihper Group is selected, and then select the previously created cipher group "MSH_PQC_NEW"
+    ![client-profiles-update](images/image102.png)
+<br>
+
+> Note: Since you created the Cipher rule, group and updated the SSL client profile, you can directly jump to step 22 and 23 to verify virtual server config
+
+To use existing configuration
+15. Navigate to BIG-IP cipher rules
+    ![cipher-rules](images/image11.png)
+
+<br>
+
+16. The `TMSH_PQC` PQC profile has been created for you using TMSH.  Please review it using the TMUI.
 
     ![pqc-tmsh](images/image12.png)
 <br>
 
-5. Explore the TMSH_PQC rule, and verify the setup
+17. Explore the TMSH_PQC rule, and verify the setup
 
     ![pqc-tmsh-rule](images/image13.png)
 <br>
 
-6. Navigate to BIG-IP cipher groups
+18. Navigate to BIG-IP cipher groups
 
     ![cipher-groups](images/image14.png)
 <br>
 
-7. Explore the TMSH_PQC group, and verify the setup
+19. Explore the TMSH_PQC group, and verify the setup
 
     ![pqc-tmsh-group](images/image15.png)
 <br>
 
-8. Navigate to SSL Client profiles
+20. Navigate to SSL Client profiles
 
     ![client-profiles](images/image16.png)
 <br>
 
-9. Explore the TMSH_PQC client SSL profile, and verify the setup
+21. Explore the TMSH_PQC client SSL profile, and verify the setup
 
     ![pqc-client-ssl](images/image17.png)
 
     ![pqc-client-ssl-settings](images/image18.png)  
     <br>
 
-10. Navigate to the BIG-IP virtual servers
+22. Navigate to the BIG-IP virtual servers
 
     ![virtual-servers](images/image19.png)  
     <br>
 
-11. Explore the pqc_vs virtual server, and verify the setup
+23. Explore the pqc_vs virtual server, and verify the setup
 
     ![pqc-virtual-server](images/image20.png)
 <br>
