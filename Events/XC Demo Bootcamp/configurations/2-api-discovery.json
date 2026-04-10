@@ -75,6 +75,5 @@
         "system_default_timeouts": {},
         "disable_threat_mesh": {},
         "disable_malware_protection": {}
-    },
-    "resource_version": "3072252246"
+    }
 }
