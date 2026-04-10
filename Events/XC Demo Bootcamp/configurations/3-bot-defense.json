@@ -1,0 +1,9 @@
+{
+  "metadata": {
+    "name": "change-me-bot"
+  },
+  "spec": {
+    "region": "US",
+    "f5_big_ip": {}
+  }
+}

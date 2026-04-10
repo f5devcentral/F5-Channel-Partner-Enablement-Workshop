@@ -1,0 +1,80 @@
+{
+    "metadata": {
+        "name": "change-me-lb",
+        "namespace": "partner-se",
+        "labels": {},
+        "annotations": {},
+        "disable": false
+    },
+    "spec": {
+        "domains": [
+            "change-me-lb.f5-channel.f5demos.com"
+        ],
+        "http": {
+            "dns_volterra_managed": true,
+            "port": 80
+        },
+        "advertise_on_public_default_vip": {},
+        "default_route_pools": [
+            {
+                "pool": {
+                    "tenant": "f5-channel-rwtqhrvn",
+                    "namespace": "partner-se",
+                    "name": "appedge",
+                    "kind": "origin_pool"
+                },
+                "weight": 1,
+                "priority": 1,
+                "endpoint_subsets": {}
+            }
+        ],
+        "routes": [],
+        "disable_waf": {},
+        "add_location": true,
+        "no_challenge": {},
+        "user_id_client_ip": {},
+        "disable_rate_limit": {},
+        "waf_exclusion_rules": [],
+        "waf_exclusion": {
+            "waf_exclusion_inline_rules": {
+                "rules": []
+            }
+        },
+        "data_guard_rules": [],
+        "blocked_clients": [],
+        "trusted_clients": [],
+        "ddos_mitigation_rules": [],
+        "l7_ddos_protection": {
+            "mitigation_block": {},
+            "default_rps_threshold": {},
+            "clientside_action_none": {},
+            "ddos_policy_none": {}
+        },
+        "service_policies_from_namespace": {},
+        "round_robin": {},
+        "disable_trust_client_ip_headers": {},
+        "disable_malicious_user_detection": {},
+        "enable_api_discovery": {
+            "disable_learn_from_redirect_traffic": {},
+            "discovered_api_settings": {
+                "purge_duration_for_inactive_discovered_apis": 2
+            },
+            "api_crawler": {
+                "disable_api_crawler": {}
+            },
+            "default_api_auth_discovery": {}
+        },
+        "disable_bot_defense": {},
+        "default_sensitive_data_policy": {},
+        "disable_api_testing": {},
+        "disable_api_definition": {},
+        "disable_ip_reputation": {},
+        "disable_client_side_defense": {},
+        "graphql_rules": [],
+        "protected_cookies": [],
+        "system_default_timeouts": {},
+        "disable_threat_mesh": {},
+        "disable_malware_protection": {}
+    },
+    "resource_version": "3072252246"
+}
