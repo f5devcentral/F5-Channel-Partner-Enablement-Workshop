@@ -82,7 +82,7 @@
             "protocol": "BOTH",
             "any_domain": {},
             "path": {
-              "prefix": "/login"
+              "prefix": "/index"
             },
             "query_params": [],
             "headers": [],
